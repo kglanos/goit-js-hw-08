@@ -17,15 +17,16 @@ player.on('pause', function() {
     console.log('Pause video!');
 });
 
+player.on('loaded', async () => {
+    const savedTime = localStorage.getItem('videoplayer-current-time');
+    if (savedTime) {
+        await player.setCurrentTime(parseFloat(savedTime));
+        console.log('Automatyczny zapis - oglądaj dalej!');
+    }
+});
+
 player.on('timeupdate', function(data) {
     saveTimeToLocalStorage(data.seconds);
 });
-
-const savedTime = localStorage.getItem('videoplayer-current-time');
-if (savedTime !== null) {
-    player.setCurrentTime(parseFloat(savedTime));
-
-    console.log('Automatyczny zapis - oglądaj dalej!');
-}
 
 player.ready()

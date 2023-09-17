@@ -34,6 +34,12 @@ import throttle from 'lodash.throttle';
     email: emailInput.value,
     message: messageTextarea.value,
     };
+    
+    if (formData.email.trim() === '' || formData.message.trim() === '') {
+    alert("E-mail i Message nie mogą być puste.");
+    return;
+    }
+    
     console.log("", formData);
 
     localStorage.removeItem("feedback-form-state");
